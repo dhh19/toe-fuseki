@@ -1,4 +1,4 @@
-FROM secoresearch/fuseki AS build
+FROM secoresearch/fuseki
 
 USER 0
 
@@ -119,11 +119,8 @@ RUN mkdir /tmp/data && wget https://linkedpolitics.project.cwi.nl/web/talk_of_eu
         && $TEXTINDEXER \
         && $SPATIALINDEXER \
         && $TDBSTATS --graph urn:x-arq:UnionGraph > /tmp/stats.opt \
-        && mv /tmp/stats.opt $FUSEKI_BASE/databases/tdb/
-
-FROM secoresearch/fuseki
-
-COPY --from=build $FUSEKI_BASE/databases/tdb/ $FUSEKI_BASE/databases/tdb/
+        && mv /tmp/stats.opt $FUSEKI_BASE/databases/tdb/ \
+        && rm -rf /tmp/data
 
 RUN chmod -R a+rwX $FUSEKI_BASE
 
