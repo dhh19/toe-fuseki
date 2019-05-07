@@ -2,7 +2,7 @@ FROM secoresearch/fuseki
 
 USER 0
 
-RUN mkdir /tmp/data && wget https://linkedpolitics.project.cwi.nl/web/talk_of_europe_2018-05-02.tar.gz -O /tmp/data/toe.tgz && tar -xf /tmp/data/toe.tgz -C /tmp/data/ && rm /tmp/data/toe.tgz && $TDBLOADER --graph=file://data/Croatian.ttl.gz /tmp/data/Croatian.ttl.gz \
+RUN mkdir /tmp/data && wget -O - https://linkedpolitics.project.cwi.nl/web/talk_of_europe_2018-05-02.tar.gz | tar -xz -C /tmp/data/ && $TDBLOADER --graph=file://data/Croatian.ttl.gz /tmp/data/Croatian.ttl.gz \
         && $TDBLOADER --graph=file://data/MembersOfParliament_background.ttl.gz /tmp/data/MembersOfParliament_background.ttl.gz \
         && $TDBLOADER --graph=file://data/Greek.ttl.gz /tmp/data/Greek.ttl.gz \
         && $TDBLOADER --graph=file://data/text_prov.ttl.gz /tmp/data/text_prov.ttl.gz \
