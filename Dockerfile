@@ -120,8 +120,7 @@ RUN mkdir /tmp/data && wget -O - https://linkedpolitics.project.cwi.nl/web/talk_
         && $SPATIALINDEXER \
         && $TDBSTATS --graph urn:x-arq:UnionGraph > /tmp/stats.opt \
         && mv /tmp/stats.opt $FUSEKI_BASE/databases/tdb/ \
-        && rm -rf /tmp/data
-
-RUN chmod -R a+rwX $FUSEKI_BASE
+        && rm -rf /tmp/data \
+        && chmod -R a+rwX $FUSEKI_BASE
 
 USER 9008
